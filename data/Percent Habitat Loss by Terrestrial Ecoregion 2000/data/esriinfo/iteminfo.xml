@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ESRI_ItemInformation Culture='en-US'>
+<name>4129ed6c25c2450cab4d5446d8ec74e9</name>
+<guid>9143440C-B37D-4DA6-BC29-ABF52BC9DD04</guid>
+<catalogpath></catalogpath>
+<snippet></snippet>
+<description>Percent of each terrestrial ecoregion&apos;s natural habitat that has been converted by humans.  &lt;br/&gt;
+&lt;br/&gt;
+
+
+The data on the amount of habitat lost was derived from the Global Land Cover 2000 (JRC 2003), which is based on satellite imagery; the Global Rural-Urban Mapping Project (CIESIN et al. 2004); and a global coverage of roads and railroads compiled from ESRI Digital Chart of the World. While the data tell us how much land has been converted from a natural state to a human-altered state for 2000, it does not tell us about any specific type of habitat that has been lost, what it was converted to, how long ago it was converted, or the extent to which the human land use still supports some biodiversity. Because the satellite-derived data are observations made around 2000, they do not reflect ongoing rates of habitat loss. &lt;br/&gt;
+&lt;br/&gt;
+
+
+These data were derived by The Nature Conservancy, and were displayed in a map published in The Atlas of Global Conservation (Hoekstra et al., University of California Press, 2010). More information at http://nature.org/atlas.&lt;br/&gt;
+&lt;br/&gt;
+
+
+Data derived from:&lt;br/&gt;
+
+
+CIESIN (Center for International Earth Science Information Network), IFPRI (International Food Policy Research Institute), the World Bank; and CIAT (Centro Internacional de Agricultura Tropical). 2004. Global Rural-Urban Mapping Project (GRUMP): Urban extents, Columbia University Palisades, New York, USA. Available at http://sedac.ciesin.columbia.edu/gpw/. Digital media.&lt;br/&gt;
+&lt;br/&gt;
+
+
+Joint Research Centre of the European Commission (JRC). 2003. GLC 2000: Global Land Cover Mapping for the Year 2000. Ispra, Italy: European Commission Joint Research Centre, Institute for Environment and Sustainability. Available at www-tem.jrc.it/glc2000. Digital media.
+
+This dataset was uploaded to Data Basin and is available with additional information at: http://app.databasin.org/app/pages/datasetPage.jsp?id=4129ed6c25c2450cab4d5446d8ec74e9</description>
+<summary></summary>
+<title>Percent Habitat Loss by Terrestrial Ecoregion 2000</title>
+<tags></tags>
+<type>Layer Package</type>
+<typekeywords>
+<typekeyword>Shapefile Feature Class</typekeyword>
+<typekeyword>Layer Package</typekeyword>
+<typekeyword>Data</typekeyword>
+<typekeyword>ArcMap</typekeyword>
+<typekeyword>.lpk</typekeyword>
+</typekeywords>
+<thumbnail>thumbnail/thumbnail.png</thumbnail>
+<documentation></documentation>
+<url></url>
+<datalastmodifiedtime></datalastmodifiedtime>
+<extent>
+<xmin>-179.999988600612</xmin>
+<ymin>-89.8919732774029</ymin>
+<xmax>179.999988600612</xmax>
+<ymax>83.6231251716938</ymax>
+</extent>
+<spatialreference>GCS_WGS_1984</spatialreference>
+<accessinformation></accessinformation>
+</ESRI_ItemInformation>
