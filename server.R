@@ -209,14 +209,14 @@ function(input, output, session) {
   output$curr_country_value2000 = renderInfoBox({
     req(input$iso)
     infoBox(
-      "2000 Value (% cover)", forest_long$value[forest_long$iso3c == input$iso & forest_long$time_period == "forests_2000"],
+      "2000 Value (% cover)", forest_shares$forests_2000[forest_shares$iso3c == input$iso],
       color = "blue"
     )
   })
   output$curr_country_value2020 = renderInfoBox({
     req(input$iso)
     infoBox(
-      "2020 Value (% cover)", forest_long$value[forest_long$iso3c == input$iso & forest_long$time_period == "forests_2020"],
+      "2020 Value (% cover)", forest_shares$forests_2020[forest_shares$iso3c == input$iso],
       color = "blue"
     )
   })
