@@ -1,5 +1,7 @@
 STAT451 Final Project - Topic: Deforestation 
 
+Note: My project was reasonably small enough (<100 mb), so it is possible to simply clone the repository directly to run it.
+
 Installation and Sources
 
 Data sources 
