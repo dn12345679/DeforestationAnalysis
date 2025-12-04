@@ -7,7 +7,7 @@ library(sf)
 library(rstudioapi)
 library(rmapshaper)
 library(plotly)
-
+library(WDI)
 
 
 function(input, output, session) {
@@ -22,7 +22,28 @@ function(input, output, session) {
   
   habitat_loss_simple <- rmapshaper::ms_simplify(habitat_loss, keep = 0.05)
 
+
+    
+  pop_data <- WDI(indicator = "SP.POP.TOTL", 
+                  start = 2000, 
+                  end = 2020,
+                  extra = TRUE)
+  pop_data = pop_data[!is.na(pop_data$SP.POP.TOTL),]
+  top_pop <- pop_data$SP.POP.TOTL > quantile(pop_data$SP.POP.TOTL, 0.75, na.rm = TRUE)
+  top_pop_2020 <- pop_data[top_pop & pop_data$year == 2020,]
+  bot_pop <- pop_data$SP.POP.TOTL < quantile(pop_data$SP.POP.TOTL, 0.25, na.rm = TRUE)
+  bot_pop_2020 <- pop_data[bot_pop & pop_data$year == 2020,]
+  
   options(scipen = 999)
+  
+  showTopPop = reactive({
+    req(input$ShowTopPop)
+    input$ShowTopPop
+  })
+  showBotPop = reactive({
+    req(input$ShowBotPop)
+    input$ShowBotPop
+  })
   
   thePoint = reactive({
     req(input$Entity)
@@ -45,6 +66,7 @@ function(input, output, session) {
     forest_shares %>%
       filter(`ico3c` == input$iso)
   })
+  
 
   output$for_ch = renderPlotly(
     {
@@ -52,16 +74,34 @@ function(input, output, session) {
         pivot_longer(cols = c("forests_2000", "forests_2020"),
                      names_to = "time_period",
                      values_to = "value") %>%
-        mutate(highlight = (`iso3c` == input$iso))
+        mutate(highlight = (`iso3c` == input$iso), 
+               top_pop = (`iso3c` %in% top_pop_2020$iso3c),
+               bot_pop = (`iso3c` %in% bot_pop_2020$iso3c))
+      
+      if (input$ShowBotPop & input$ShowTopPop) {
+        forest_long <- forest_long %>%
+          filter(top_pop == TRUE | bot_pop == TRUE)
+      }
+      
+      if(input$ShowTopPop) {
+
+        forest_long <- forest_long %>%
+          filter(top_pop == TRUE)
+      }
+      if (input$ShowBotPop) {
+        forest_long <- forest_long %>% filter(bot_pop == TRUE)
+      }
       
       p <- ggplot(forest_long, aes(x = time_period, y = value, group = iso3c,
                                    text = paste0(
                                      "<b>ISO: </b>", iso3c, "<br>",
                                      "<b>Slope: </b>", trend
                                    ))) + 
-        geom_line(aes(color = highlight), linewidth = 0.3) + 
+        geom_line(aes(color = highlight, linetype = top_pop | bot_pop , linewidth = highlight)) + 
         geom_point(aes(color = highlight), size = 0.8) + 
-        scale_color_manual(values = c("TRUE" = "red", "FALSE" = "gray")) + 
+        scale_color_manual(values = c("TRUE" = "red", "FALSE" = "black")) + 
+        scale_linewidth_manual(values = c("TRUE" = 0.5, "FALSE" = 0.3)) + 
+        scale_linetype_manual(values = c("TRUE" = "dotted", "FALSE" = "solid")) +
         geom_text(data = subset(forest_long, time_period == "2000"),
                   aes(label = iso3c), hjust = 1.2, size = 4) +
         geom_text(data = subset(forest_long, time_period == "2020"),

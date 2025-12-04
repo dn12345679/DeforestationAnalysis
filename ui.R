@@ -8,6 +8,8 @@ library(sf)
 library(rstudioapi)
 library(rmapshaper)
 library(plotly)
+library(WDI)
+
 
 living_index <- read.csv("data/global-living-planet-index/global-living-planet-index.csv")
 location_data <- read.csv("data/world_country_and_usa_states_latitude_and_longitude_values.csv")
@@ -21,6 +23,8 @@ sidebar <- dashboardSidebar(
     menuItem("Forest Shares",
              tabName = "fs",
              icon = icon("tree")),
+    checkboxInput('ShowTopPop', 'Show Top 20% pop.?', value = FALSE),
+    checkboxInput('ShowBotPop', 'Show Bottom 20% pop.?', value = FALSE),
     selectInput("iso", "Select a country",
                 choices = unique(forest_shares$iso3c))
   ),
@@ -62,6 +66,7 @@ body <- dashboardBody(
   ),
   tabItems(
     tabItem(tabName = "fs",
+
             fluidRow(
               infoBoxOutput(width = 3, "curr_country"),
               infoBoxOutput(width = 3, "curr_country_value2000"),
